@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>从源码构建Grafana (只针对windows系统) | bull3的博客</title>
-  <meta name="keywords" content=" 前端 , 后端 ">
-  <meta name="description" content="从源码构建Grafana (只针对windows系统) | bull3的博客">
+  <title>bull3的博客</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="bull3的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Bull3.github.io博客地址: https:&#x2F;&#x2F;bull3.xyz&#x2F;">
 <meta property="og:type" content="website">
@@ -213,33 +213,17 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-grafana" class="article article-type-post" itemscope itemprop="blogPost">
-    
-        <h1 class="article-title">从源码构建Grafana (只针对windows系统)</h1>
+        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
     
     <div class="article-meta">
         
         
         
-        <span class="book">
-            
-                <a  data-rel="全栈类">全栈类</a>
-            
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a class="color3">前端</a>
-            
-            <a class="color3">后端</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-22 17:33:56'>2019-12-04 14:46</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-22 19:38:37'>2020-05-22 19:38</time>
         
     </div>
     <div class="article-meta">
@@ -272,7 +256,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-grafana源代码及文档"><span class="toc-text">1. grafana源代码及文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-构建后端"><span class="toc-text">2. 构建后端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-安装依赖"><span class="toc-text">2.1 安装依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-编译后端"><span class="toc-text">2.2 编译后端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-实时编译后端"><span class="toc-text">2.3 实时编译后端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-构建前端"><span class="toc-text">3. 构建前端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-启动服务"><span class="toc-text">4. 启动服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-开发配置"><span class="toc-text">4.1 开发配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-启动服务"><span class="toc-text">4.2 启动服务</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Bull3-github-io"><span class="toc-text">Bull3.github.io</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -288,37 +272,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-grafana源代码及文档"><a href="#1-grafana源代码及文档" class="headerlink" title="1. grafana源代码及文档"></a>1. grafana源代码及文档</h2><blockquote>
-<p>从<a href="https://github.com/grafana/grafana/releases" target="_blank" rel="noopener">grafana发布包</a>中选择一个版本, 下载压缩包后解压缩<br>开发文档可参考<a href="https://grafana.com/docs/" target="_blank" rel="noopener">grafana官方文档</a><br><a href="https://grafana.com/docs/grafana/v4.5/project/building_from_source/" target="_blank" rel="noopener">旧版构建指南</a><br><a href="https://github.com/grafana/grafana/blob/master/contribute/developer-guide.md" target="_blank" rel="noopener">新版构建指南</a></p>
-</blockquote>
-<h2 id="2-构建后端"><a href="#2-构建后端" class="headerlink" title="2. 构建后端"></a>2. 构建后端</h2><h3 id="2-1-安装依赖"><a href="#2-1-安装依赖" class="headerlink" title="2.1 安装依赖"></a>2.1 安装依赖</h3><blockquote>
-<p>项目必需的依赖项</p>
-<ul>
-<li><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a></li>
-<li><a href="https://gomirrors.org/" target="_blank" rel="noopener">Go</a>（请参阅<a href="https://github.com/grafana/grafana/blob/master/go.mod#L3" target="_blank" rel="noopener">go.mod</a>以获取最低要求的版本）</li>
-<li><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a></li>
-<li><a href="https://yarnpkg.com/lang/en/" target="_blank" rel="noopener">Yarn</a></li>
-</ul>
-</blockquote>
-<blockquote>
-<p>构建后端所需的依赖项</p>
-<ul>
-<li>Grafana后端包括需要GCC编译的Sqlite3。建议安装<a href="http://tdm-gcc.tdragon.net/download" target="_blank" rel="noopener">TDM-GCC</a>。</li>
-<li>node-gyp是Node.js本机插件构建工具，它需要额外的依赖项才能在Windows上安装。以管理员身份运行powershell，输入：npm –add-python-to-path=’true’ –debug install –global windows-build-tools</li>
-</ul>
-</blockquote>
-<h3 id="2-2-编译后端"><a href="#2-2-编译后端" class="headerlink" title="2.2 编译后端"></a>2.2 编译后端</h3><p>由于golang网站在国内被墙, go的一些依赖无法安装, 需要设置go的全局代理,<br>新建2个windows环境变量, 设置 GO111MODULE 为 on , 设置 GOPROXY 为 <a href="https://goproxy.io" target="_blank" rel="noopener">https://goproxy.io</a> (七牛也有国内代理 <a href="https://goproxy.cn" target="_blank" rel="noopener">https://goproxy.cn</a>)</p>
-<pre><code class="dos">go run build.go setup
-go run build.go build    # (或者 &#39;go build ./pkg/cmd/grafana-server&#39;)
-# 编译完成会在bin\windows-amd64目录下的生成grafana-server.exe等文件</code></pre>
-<h3 id="2-3-实时编译后端"><a href="#2-3-实时编译后端" class="headerlink" title="2.3 实时编译后端"></a>2.3 实时编译后端</h3><pre><code class="bat">go get github.com/Unknwon/bra
-bra run</code></pre>
-<h2 id="3-构建前端"><a href="#3-构建前端" class="headerlink" title="3. 构建前端"></a>3. 构建前端</h2><pre><code class="bat">yarn # 安装package.json中的依赖
-yarn start # 编译并打包前端代码</code></pre>
-<h2 id="4-启动服务"><a href="#4-启动服务" class="headerlink" title="4. 启动服务"></a>4. 启动服务</h2><h3 id="4-1-开发配置"><a href="#4-1-开发配置" class="headerlink" title="4.1 开发配置"></a>4.1 开发配置</h3><p>在conf目录中创建custom.ini，以覆盖默认配置选项。您只需要添加要覆盖的选项。配置文件按以下顺序应用：</p>
-<pre><code class="bat">1. grafana.ini
-2. custom.ini</code></pre>
-<h3 id="4-2-启动服务"><a href="#4-2-启动服务" class="headerlink" title="4.2 启动服务"></a>4.2 启动服务</h3><p>在项目根目录下运行.\bin\windows-amd64\grafana-server<br>默认访问<a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a> 即可看到页面, 用户名密码均为admin, 端口号可在上面的ini配置中修改</p>
+        <h1 id="Bull3-github-io"><a href="#Bull3-github-io" class="headerlink" title="Bull3.github.io"></a>Bull3.github.io</h1><p>博客地址: <a href="https://bull3.xyz/">https://bull3.xyz/</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1019067334@qq.com </span>
@@ -330,18 +284,6 @@ yarn start # 编译并打包前端代码</code></pre>
     <a  class="dashang" onclick="dashangToggle()">赏</a>
 </p>
 
-
-<div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>从源码构建Grafana (只针对windows系统)</p>
-    
-    <p><span class="copy-title">本文作者:</span><a  title="Bob shen">Bob shen</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-12-04, 14:46:37</p>
-    <p><span class="copy-title">最后更新:</span>2020-05-22, 17:33:56</p>
-    <!-- <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/12/04/grafana/" title="从源码构建Grafana (只针对windows系统)">https://bull3.xyz/2019/12/04/grafana/</a> -->
-    <p>
-        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
-    </p>
-</div>
 
 
 
